@@ -2,23 +2,14 @@ FROM centos:centos7
 
 EXPOSE 8081
 
-ENV NEXUS_VERSION 2.11.4-01
+ENV NEXUS_VERSION 2.12.0-01
 ENV NEXUS_HOME /opt/nexus/nexus
 ENV NEXUS_WORK /sonatype-work
 ENV NEXUS_REPOS /repositories
 
-RUN cd /var/tmp \
-  && curl --fail --silent --location --retry 3 -O \
-  --header "Cookie: oraclelicense=accept-securebackup-cookie; " \
-  http://download.oracle.com/otn-pub/java/jdk/7u76-b13/jdk-7u76-linux-x64.rpm \
-  && rpm -Ui jdk-7u76-linux-x64.rpm \
-  && rm -rf jdk-7u76-linux-x64.rpm
+RUN yum install epel-release java-1.8.0-openjdk-headless.x86_64 -y && yum clean all
+RUN yum install jq -y && yum clean all
 
-# Install jq
-RUN curl --fail --silent --location --retry 3 \
-    https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 \
-    -o /usr/local/bin/jq \
-    && chmod 755 /usr/local/bin/jq
 
 # Install the binaries
 RUN mkdir -p /opt/nexus/nexus \
