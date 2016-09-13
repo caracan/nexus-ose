@@ -2,7 +2,7 @@ FROM centos:7
 
 EXPOSE 8081
 
-ENV NEXUS_VERSION latest 
+ENV NEXUS_VERSION 2.13.0-01
 ENV NEXUS_HOME /opt/nexus/nexus
 ENV NEXUS_WORK /sonatype-work
 ENV NEXUS_REPOS /repositories
@@ -15,8 +15,7 @@ RUN yum install jq -y && yum clean all
 RUN mkdir -p /opt/nexus/nexus \
   && curl --fail --silent --location --retry 3 \
     http://www.sonatype.org/downloads/nexus-latest-bundle.tar.gz \
-  | gunzip \
-  | tar x -C /tmp nexus-${NEXUS_VERSION} \
+  | tar xz -C /tmp nexus-${NEXUS_VERSION} \
   && mv /tmp/nexus-${NEXUS_VERSION}/* /opt/nexus/nexus/ \
   && rm -rf /tmp/nexus-${NEXUS_VERSION}
 
