@@ -2,7 +2,7 @@ FROM centos:7
 
 EXPOSE 8081
 
-ENV NEXUS_VERSION 2.12.0-01
+ENV NEXUS_VERSION latest 
 ENV NEXUS_HOME /opt/nexus/nexus
 ENV NEXUS_WORK /sonatype-work
 ENV NEXUS_REPOS /repositories
