@@ -14,7 +14,7 @@ RUN yum install jq -y && yum clean all
 # Install the binaries
 RUN mkdir -p /opt/nexus/nexus \
   && curl --fail --silent --location --retry 3 \
-    https://download.sonatype.com/nexus/oss/nexus-${NEXUS_VERSION}-bundle.tar.gz \
+    http://www.sonatype.org/downloads/nexus-latest-bundle.tar.gz \
   | gunzip \
   | tar x -C /tmp nexus-${NEXUS_VERSION} \
   && mv /tmp/nexus-${NEXUS_VERSION}/* /opt/nexus/nexus/ \
